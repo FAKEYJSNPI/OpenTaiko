@@ -84,7 +84,7 @@ namespace TJAPlayer3
 		    }
 
 
-            this.nHS = TJAPlayer3.ConfigIni.n譜面スクロール速度.Drums < 8 ? TJAPlayer3.ConfigIni.n譜面スクロール速度.Drums : 7;
+            //this.nHS = TJAPlayer3.ConfigIni.nScrollSpeed.Drums < 8 ? TJAPlayer3.ConfigIni.nScrollSpeed.Drums : 7;
 
             if (TJAPlayer3.stage選曲.n確定された曲の難易度[0] == (int)Difficulty.Dan)
                 TJAPlayer3.Tx.Taiko_Background[2]?.t2D描画(TJAPlayer3.app.Device, 0, 184);
@@ -235,6 +235,27 @@ namespace TJAPlayer3
                 //    else if( CDTXMania.ConfigIni.eSTEALTH == Eステルスモード.DORON )
                 //        this.txオプションパネル_特殊.t2D描画( CDTXMania.app.Device, 0, 300, new Rectangle( 0, 44, 162, 44 ) );
                 //}
+
+                #region [Mods]
+
+                // HS
+                var _vals = new int[]{ 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 29, 34, 39, 44, 49 };
+                int _i = -1;
+
+                for (int j = 0; j < _vals.Length; j++)
+                {
+                    if (TJAPlayer3.ConfigIni.nScrollSpeed[TJAPlayer3.GetActualPlayer(i)] >= _vals[j])
+                        _i = j;
+                    else
+                        break;
+                }
+
+                if (_i >= 0)
+                    TJAPlayer3.Tx.HiSp[_i]?.t2D描画(TJAPlayer3.app.Device, 114, 236 + i * 190);
+
+                #endregion
+
+
                 if (TJAPlayer3.Tx.Couse_Symbol[TJAPlayer3.stage選曲.n確定された曲の難易度[i]] != null)
                 {
                     TJAPlayer3.Tx.Couse_Symbol[TJAPlayer3.stage選曲.n確定された曲の難易度[i]].t2D描画(TJAPlayer3.app.Device,
@@ -242,6 +263,7 @@ namespace TJAPlayer3
                         TJAPlayer3.Skin.Game_CourseSymbol_Y[i]
                         );
                 }
+
 
                 if (TJAPlayer3.ConfigIni.ShinuchiMode)
                 {
