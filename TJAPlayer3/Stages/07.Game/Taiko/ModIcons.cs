@@ -14,9 +14,9 @@ namespace TJAPlayer3
             int actual = TJAPlayer3.GetActualPlayer(player);
 
             tDisplayHSIcon(x, y, actual); // 1st icon
-            PLACEHOLDER_tDisplayNoneIcon(x + 30, y, player); // 2nd icon
-            PLACEHOLDER_tDisplayNoneIcon(x + 60, y, player); // 3rd icon
-            PLACEHOLDER_tDisplayNoneIcon(x + 90, y, player); // 4th icon
+            tDisplayDoronIcon(x + 30, y, player); // 2nd icon
+            tDisplayMirrorIcon(x + 60, y, player); // 3rd icon
+            tDisplayRandomIcon(x + 90, y, player); // 4th icon
             PLACEHOLDER_tDisplayNoneIcon(x, y + 30, player); // 5th icon
             PLACEHOLDER_tDisplayNoneIcon(x + 30, y + 30, player); // 6th icon
             PLACEHOLDER_tDisplayNoneIcon(x + 60, y + 30, player); // 7th icon
@@ -31,9 +31,9 @@ namespace TJAPlayer3
             int actual = TJAPlayer3.GetActualPlayer(player);
 
             tDisplayHSIcon(x, y, actual); // 1st icon
-            PLACEHOLDER_tDisplayNoneIcon(x + 30, y, player); // 2nd icon
-            PLACEHOLDER_tDisplayNoneIcon(x + 60, y, player); // 3rd icon
-            PLACEHOLDER_tDisplayNoneIcon(x + 90, y, player); // 4th icon
+            tDisplayDoronIcon(x + 30, y, player); // 2nd icon
+            tDisplayMirrorIcon(x + 60, y, player); // 3rd icon
+            tDisplayRandomIcon(x + 90, y, player); // 4th icon
             PLACEHOLDER_tDisplayNoneIcon(x + 120, y, player); // 5th icon
             PLACEHOLDER_tDisplayNoneIcon(x + 150, y, player); // 6th icon
             PLACEHOLDER_tDisplayNoneIcon(x + 180, y, player); // 7th icon
@@ -77,6 +77,55 @@ namespace TJAPlayer3
                 TJAPlayer3.Tx.Mod_None?.t2D描画(TJAPlayer3.app.Device, x, y);
         }
 
+                static private void tDisplayDoronIcon(int x, int y, int player)
+        {
+            bool _displayed = false;
+
+            if (player == 0 && TJAPlayer3.ConfigIni.eSTEALTH == Eステルスモード.DORON)
+                _displayed = true;
+
+            if (_displayed == true)
+                TJAPlayer3.Tx.Mod_Doron?.t2D描画(TJAPlayer3.app.Device, x, y);
+            else
+                TJAPlayer3.Tx.Mod_None?.t2D描画(TJAPlayer3.app.Device, x, y);
+        }
+        static private void tDisplayMirrorIcon(int x, int y, int player)
+        {
+            bool _displayed = false;
+
+           if(player == 0 && TJAPlayer3.ConfigIni.eRandom.Taiko == Eランダムモード.MIRROR)
+
+            if (_displayed == true)
+                TJAPlayer3.Tx.Mod_Mirror?.t2D描画(TJAPlayer3.app.Device, x, y);
+            else
+                TJAPlayer3.Tx.Mod_None?.t2D描画(TJAPlayer3.app.Device, x, y);
+        }
+
+        static private void tDisplayRandomIcon(int x, int y, int player)
+        {
+
+            bool displayed = false;
+
+            if (player == 0 && TJAPlayer3.ConfigIni.eRandom.Taiko == Eランダムモード.SUPERRANDOM)
+                displayed = true;
+
+            if (displayed == true)
+                TJAPlayer3.Tx.Mod_Super?.t2D描画(TJAPlayer3.app.Device, x, y);
+            else
+                TJAPlayer3.Tx.Mod_None?.t2D描画(TJAPlayer3.app.Device, x, y);
+
+            bool _displayed = false;
+
+            if (player == 0 && TJAPlayer3.ConfigIni.eRandom.Taiko == Eランダムモード.RANDOM)
+                _displayed = true;
+
+            if (_displayed == true)
+                TJAPlayer3.Tx.Mod_Random?.t2D描画(TJAPlayer3.app.Device, x, y);
+            else
+                TJAPlayer3.Tx.Mod_None?.t2D描画(TJAPlayer3.app.Device, x, y);
+
+        }
+        
         static private void PLACEHOLDER_tDisplayNoneIcon(int x, int y, int player)
         {
             TJAPlayer3.Tx.Mod_None?.t2D描画(TJAPlayer3.app.Device, x, y);
